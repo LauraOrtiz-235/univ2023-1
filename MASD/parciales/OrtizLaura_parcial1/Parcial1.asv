@@ -1,0 +1,65 @@
+
+%%%%%%%%%%%%%%%%%% PARCIAL 1 %%%%%%%%%%%%%%%%%%
+
+% Punto 4
+% a).
+
+% Parámetros de la simulación
+A = 50;     
+k = 0.5;    
+L0 = 1;     
+tmax = 12;  % Tiempo máximo de 12 meses
+
+% Eq diferencial
+dL = @(t,L) k*(A - L);
+
+% Solución de la eq
+[t,L] = ode45(dL, [0,tmax], L0);
+
+% Gráfica de la evolución de la talla
+plot(t,L, 'b');
+legend({'y = crecimiento del pez'},'Location','southwest')
+xlabel('Tiempo (meses)');
+ylabel('Talla');
+title('Simulación de la evolución de la talla de un pez');
+
+%%
+
+% b). Cuál es la talla del pez a los 6 meses?
+
+% Parámetros de la simulación
+A = 50;     
+k = 0.5;    
+L0 = 1;     
+tmax = 12;  % Tiempo máximo de 12 meses
+
+% Eq diferencial
+dL = @(t,L) k*(A - L);
+
+% Solución de la eq
+[t,L] = ode45(dL, [0,tmax], L0);
+
+% Gráfica de la evolución de la talla
+plot(t, L, 'b');
+legend({'y = crecimiento del pez'},'Location','southwest')
+xlabel('Tiempo (meses)');
+ylabel('Talla');
+title('Simulación de la evolución de la talla de un pez');
+
+% Según el simulador y la gráfica, podemos ver que la talla
+% del pez a los 6 meses, es de: 47.5604
+
+%%
+A = 50; % Talla máxima
+k = 0.5; % Constante de proporcionalidad
+L0 = 1; % Talla inicial
+tmax = 12; % Tiempo máximo en meses
+dt = 0.01; % Paso de tiempo
+t = 0:dt:tmax; % Vector de tiempo
+L = L0; % Inicialización de talla
+for i = 1:length(t)-1
+    L(i+1) = L(i) + k*(A - L(i))*dt; % Actualización de talla
+end
+t_6meses = 6; % Tiempo a los 6 meses
+L_6meses = interp1(t, L, t_6meses); % Talla a los 6 meses
+disp(['La talla del pez a los 6 meses es: ', num2str(L_6meses)]);
